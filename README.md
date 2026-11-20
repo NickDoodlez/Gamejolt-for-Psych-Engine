@@ -1,4 +1,4 @@
-![GameJoltAPIBanner](docs/img/banner.svg)
+![GameJoltAPIBanner](docs/img/banner.png)
 
 Game Jolt integration for [Psych Engine](https://github.com/ShadowMario/FNF-PsychEngine). Players sign in from the options menu, game achievements sync with Game Jolt trophies, scores go to your leaderboard, and everything shows up with on-screen notifications.
 
