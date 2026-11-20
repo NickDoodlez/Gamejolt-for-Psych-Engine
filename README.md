@@ -256,7 +256,7 @@ The calls changed. The old ones map like this:
 * **No avatar or icons:** check the Private Key. Those requests are signed with it.
 
 ## Credits:
-* NickDZ - This version: request queue, account menu, avatar, trophy icons, notifications, score formatting.
+* [NickDZ](https://www.youtube.com/@NickDoodlez) - This version: request queue, account menu, avatar, trophy icons, notifications, score formatting.
 * [Saw (M.A. Jigsaw)](https://github.com/jigsaw-4277821) - Redoing the code and adding multi-platform support in the previous version.
 * [TentaRJ](https://github.com/TentaRJ) - Original repo and code.
 
