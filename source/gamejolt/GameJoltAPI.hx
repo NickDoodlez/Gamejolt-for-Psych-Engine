@@ -166,7 +166,14 @@ class GameJoltAPI
 			if (finished)
 				return;
 			finished = true;
-			cb(result);
+			try
+			{
+				cb(result);
+			}
+			catch (e:Dynamic)
+			{
+				trace('[GameJolt] callback error: $e');
+			}
 		};
 
 		loader.addEventListener(Event.COMPLETE, function(_)
@@ -244,14 +251,15 @@ class GameJoltAPI
 
 		apiGet('users/', 'username=' + user.urlEncode(), function(res:Dynamic)
 		{
-			if (res == null || res.users == null)
+			var list:Dynamic = (res == null) ? null : res.users;
+			if (list == null || !Std.isOfType(list, Array))
 			{
 				finish();
 				return;
 			}
 
-			var users:Array<Dynamic> = res.users;
-			if (users.length == 0)
+			var users:Array<Dynamic> = cast list;
+			if (users.length == 0 || users[0] == null)
 			{
 				finish();
 				return;
@@ -275,14 +283,21 @@ class GameJoltAPI
 	{
 		apiGet('trophies/', 'username=' + user.urlEncode() + '&user_token=' + token.urlEncode(), function(res:Dynamic)
 		{
-			if (res == null || res.trophies == null)
+			var list:Dynamic = (res == null) ? null : res.trophies;
+			if (list == null || !Std.isOfType(list, Array))
+			{
+				trace('[GameJolt] unexpected trophies response');
 				return;
+			}
 
 			var wanted:Array<Int> = [for (v in GameJoltInfo.TROPHIES) v];
-			var trophies:Array<Dynamic> = res.trophies;
+			var trophies:Array<Dynamic> = cast list;
 
 			for (t in trophies)
 			{
+				if (t == null)
+					continue;
+
 				var id:Null<Int> = Std.parseInt(Std.string(t.id));
 				if (id == null || wanted.indexOf(id) == -1)
 					continue;
